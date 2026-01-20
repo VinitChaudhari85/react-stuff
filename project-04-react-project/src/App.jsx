@@ -21,11 +21,8 @@ function App() {
       <div className="box bg-gray-900 text-white flex flex-col justify-center items-center rounded-2xl pt-3">
         <h2>Some Heading</h2>
         <div className="box2 grid grid-cols-4 gap-4 p-5">
-          {/* <Card 
-            image={CARD_OBJECTS[0].image}
-            title={CARD_OBJECTS[0].title}
-            content={CARD_OBJECTS[0].content}
-          />
+          {/* spread operator */}
+          <Card {...CARD_OBJECTS[0]}/> 
           <Card 
             image={CARD_OBJECTS[1].image}
             title={CARD_OBJECTS[1].title}
@@ -40,10 +37,10 @@ function App() {
             image={CARD_OBJECTS[3].image}
             title={CARD_OBJECTS[3].title}
             content={CARD_OBJECTS[3].content}
-          /> */}
-          {CARD_OBJECTS.map((card,index)=>(
+          />
+          {/* {CARD_OBJECTS.map((card,index)=>(
             <Card key={index} image={card.image} title={card.title} content={card.content}/>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>
