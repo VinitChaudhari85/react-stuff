@@ -31,7 +31,7 @@ function App(){
         <Button name={CONTENT_DATA.state.title} onClick={()=> setExample(CONTENT_DATA.state)}/>
       </div>
       
-      <div className="items-center bg-purple-900 w-4xl mx-auto p-6 rounded text-white shadow-md">
+      <div className="items-center bg-purple-900 w-4xl mx-auto p-6 rounded text-white shadow-2xl">
         <h2 className="text-lg p-2">{example.title}</h2>
         <div className="p-2">{example.content}</div>
         <pre>
