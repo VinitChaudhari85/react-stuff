@@ -1,6 +1,6 @@
-import componentImg from "../assets/building-blocks.png";
-import jsxImg from "../assets/syntax.png";
-import propsImg from "../assets/transfer.png";
+import componentImg from "../assets/components.png";
+import jsxImg from "../assets/jsx.png";
+import propsImg from "../assets/props.png";
 import stateImg from "../assets/state.png";
 
 export const CARD_DATA = [
