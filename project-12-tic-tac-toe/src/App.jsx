@@ -7,14 +7,14 @@ function App() {
     <main className="bg-amber-400 bg-[url(C:\Users\vinit\Desktop\react-stuff\project-12-tic-tac-toe\src\assets\bg-pattern.png)] bg-repeat min-h-screen flex flex-col justify-center items-center gap-16">
       <Header heading={"Tic-Tac-Toe"} />
 
-      <div className="game-container bg-black text-white p-6 flex flex-col gap-4 rounded drop-shadow-2xl  w-1/2">
+      <div className="game-container bg-black text-white p-6 flex flex-col gap-4 rounded drop-shadow-2xl  w-xl">
         {/* [PLAYER NAMES] */}
         <ol className="flex gap-20 justify-center">
           <Player initialName={"Player 1"} symbol={"X"}/>
           <Player initialName={"Player 2"} symbol={"O"}/>
         </ol>
         {/* [GAME BOARD] */}
-          <Gameboard/>
+          <div className="flex justify-center"><Gameboard/></div>
       </div>
       {/* [LOGS] */}
     </main>
