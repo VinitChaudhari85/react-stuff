@@ -1,27 +1,44 @@
-const initialGameboard = [
+const initialGameBoard = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
-]
+];
 
-export default function Gameboard() {
+export default function Gameboard({changePlayer, Logs}) {
+
+    let gameBoard = initialGameBoard.map(row => [...row]);
+
+    for(const log of Logs){
+        const {square, player} = log
+        const {row, col} = square
+
+        gameBoard[row][col] = player
+    }
+
+    // const [gameBoard, setGameBoard] = useState(initialGameBoard);
+
+    // function handleSelectSquare(rowIndex, colIndex){
+    //     setGameBoard((prevGameBoard)=>{
+    //         const updatedArray = [...prevGameBoard.map(innerArray=> [...innerArray])]
+    //         updatedArray[rowIndex][colIndex] = activePlayerSymbol
+    //         return updatedArray;
+    //     })
+    //     changePlayer();
+    // }
+ 
   return (
-    <ol className="grid grid-cols-3 gap-3">
-      {initialGameboard.map((row, rowIndex) => (
+    <ol className="border border-white min-w-96 p-2">
+      {gameBoard.map((row, rowIndex) => (
         <li key={rowIndex}>
-          <ol>
+          <ol className="flex gap-2 p-1 justify-center">
             {row.map((playerSymbol, colIndex) => (
-              <li
-                key={colIndex}
-                className="w-28 h-28 border border-white"
-              >
+              <li key={colIndex} className="border border-white flex flex-center items-center">
                 <button
-                  className="
-                    w-full h-full
-                    flex items-center justify-center
-                    text-4xl font-bold
-                    hover:bg-gray-800
-                  "
+                  className="w-32 h-32 hover:bg-yellow-900 font-bold text-4xl"
+                  onClick={()=>{
+                    if(playerSymbol) return;
+                    changePlayer(rowIndex, colIndex)
+                  }}
                 >
                   {playerSymbol}
                 </button>
@@ -31,5 +48,5 @@ export default function Gameboard() {
         </li>
       ))}
     </ol>
-  )
+  );
 }

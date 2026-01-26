@@ -1,45 +1,37 @@
-import { useState } from "react"
+import { useState } from "react";
 
 export default function Player({ initialName, symbol }) {
-  const [playerName, setPlayerName] = useState(initialName)
-  const [isEditing, setIsEditing] = useState(false)
+  const [name, setName] = useState(initialName);
+  const [isEditing, setIsEditing] = useState(false);
 
-  function handleClick() {
-    setIsEditing(editing => !editing)
+  function handleToggle() {
+    setIsEditing((prev) => !prev);
   }
 
-  function handleChange(event) {
-    setPlayerName(event.target.value)
-  }
-
-  let nameField = (
-    <span className="w-28 text-center font-medium">
-      {playerName}
-    </span>
-  )
-
-  if (isEditing) {
-    nameField = (
-      <input
-        className="w-28 text-center bg-gray-800 rounded outline-none"
-        value={playerName}
-        onChange={handleChange}
-      />
-    )
+  function handleChange(e) {
+    setName(e.target.value);
   }
 
   return (
     <li className="flex items-center gap-4">
-      <div className="flex items-center gap-2 border border-gray-600 px-3 py-2 rounded">
-        {nameField}
-        <span className="text-xl font-bold">{symbol}</span>
-      </div>
+      {isEditing ? (
+        <input
+          className="bg-yellow-900 w-28 text-center text-black"
+          value={name}
+          onChange={handleChange}
+        />
+      ) : (
+        <span className="w-28 text-center">{name}</span>
+      )}
+
+      <span className="font-bold">{symbol}</span>
+
       <button
-        onClick={handleClick}
-        className="text-sm px-3 py-1 border border-gray-600 rounded hover:bg-gray-700"
+        onClick={handleToggle}
+        className="border px-2 rounded cursor-pointer"
       >
         {isEditing ? "Save" : "Edit"}
       </button>
     </li>
-  )
+  );
 }

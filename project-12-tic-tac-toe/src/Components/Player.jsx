@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Player({initialName, symbol}){
+export default function Player({initialName, symbol, isActive}){
     
     const [playerName, setPlayerName] = useState(initialName)
     const [isEditing, setIsEditing] = useState(false);
@@ -13,23 +13,21 @@ export default function Player({initialName, symbol}){
         setPlayerName(event.target.value);       
     }
 
-    let editablePlayerName = <span className="text-center w-28">{playerName}</span>
+    let editablePlayerName = <span className="inline-block rounded text-center w-32 m-2">{playerName}</span>
     let buttonName ="Edit"
 
     if(isEditing){
-        editablePlayerName = <input type="text" className="bg-gray-800 w-28 text-center rounded" value={playerName} onChange={handleChange} required />
+        editablePlayerName = <input type="text" className="bg-yellow-900 w-32 m-2 text-center rounded" value={playerName} onChange={handleChange} required />
         buttonName="Save"
     }
 
     return(
-        <li className="flex gap-6 justify-center">
-            <span className="flex gap-7">
+        <li className={`flex gap-6 p-4 items-center w-xl ${isActive ? "border border-white" : ""}`}>
+            <span>
                 {editablePlayerName}
-                <span>{symbol}</span>
-              {/* <span>{name}</span>
-              <span>{symbol}</span> */}
+                <span className="m-2">{symbol}</span>
             </span>
-            <button onClick={handleClick}>{buttonName}</button>
+            <button  className="border border-white w-14 rounded cursor-pointer" onClick={handleClick}>{buttonName}</button>
           </li>
     )
 }

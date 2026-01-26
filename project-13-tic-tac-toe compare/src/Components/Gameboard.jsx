@@ -1,26 +1,18 @@
-const initialGameboard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-]
+import Tile from "./Tile";
 
-export default function Gameboard() {
+export default function Gameboard({ board, onTileClick, gameOver }) {
   return (
-    <div className="grid grid-cols-3 gap-3">
-      {initialGameboard.flat().map((playerSymbol, index) => (
-        <button
-          key={index}
-          className="
-            w-28 h-28
-            border border-white
-            flex items-center justify-center
-            text-4xl font-bold
-            hover:bg-gray-800
-          "
-        >
-          {playerSymbol}
-        </button>
-      ))}
+    <div className="grid grid-cols-3 gap-1 bg-white p-1 border-2 border-black">
+      {board.map((row, rowIndex) =>
+        row.map((symbol, colIndex) => (
+          <Tile
+            key={`${rowIndex}-${colIndex}`}
+            value={symbol}
+            gameOver={gameOver}
+            onSelect={() => onTileClick(rowIndex, colIndex)}
+          />
+        ))
+      )}
     </div>
-  )
+  );
 }
