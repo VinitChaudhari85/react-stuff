@@ -14,17 +14,6 @@ export default function Gameboard({changePlayer, Logs}) {
 
         gameBoard[row][col] = player
     }
-
-    // const [gameBoard, setGameBoard] = useState(initialGameBoard);
-
-    // function handleSelectSquare(rowIndex, colIndex){
-    //     setGameBoard((prevGameBoard)=>{
-    //         const updatedArray = [...prevGameBoard.map(innerArray=> [...innerArray])]
-    //         updatedArray[rowIndex][colIndex] = activePlayerSymbol
-    //         return updatedArray;
-    //     })
-    //     changePlayer();
-    // }
  
   return (
     <ol className="border border-white min-w-96 p-2">
