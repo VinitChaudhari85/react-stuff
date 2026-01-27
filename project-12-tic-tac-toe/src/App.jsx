@@ -14,7 +14,6 @@ function App() {
   const [hasWinner, setHasWinner] = useState(null);
   const [hasDraw, setHasDraw] = useState(false);
 
-
   function checkWinner(updatedLogs){
     const board = [
       [null, null, null],
@@ -68,7 +67,6 @@ function App() {
   setHasWinner(null);
   setHasDraw(false);
 }
-
 
   return (
     <main className="bg-amber-400 bg-[url(C:\Users\vinit\Desktop\react-stuff\project-12-tic-tac-toe\src\assets\bg-pattern.png)] bg-repeat min-h-screen flex flex-col justify-center items-center gap-16 py-16">
