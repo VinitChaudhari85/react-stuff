@@ -14,7 +14,7 @@ export default function UserInput({ userInput, onChange }) {
             }
           />
         </p>
-
+ 
         <p className="flex flex-col p-2 w-48">
           <label className="text-xs">ANNUAL INVESTMENT</label>
           <input
