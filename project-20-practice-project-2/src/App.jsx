@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import AddPerson from "./components/AddPerson";
 import AddExpense from "./components/AddExpense";
+import ExpenseList from "./components/ExpenseList";
 
 export default function App() {
   //create a state first for the people
@@ -34,6 +35,7 @@ export default function App() {
     };
 
     setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
+    console.log(newExpense);
   }
 
   return (
@@ -43,7 +45,10 @@ export default function App() {
         <AddPerson onAddPerson={handleAddperson} />
 
         <div className="mt-6">
-          <AddExpense />
+          <AddExpense persons={persons} onAddExpense={handleAddExpense} />
+        </div>
+        <div className="mt-6">
+          <ExpenseList persons={persons} expenses={expenses} />
         </div>
 
         <div className="mt-6">

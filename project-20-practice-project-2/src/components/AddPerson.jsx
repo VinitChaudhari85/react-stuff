@@ -21,7 +21,7 @@ export default function AddPerson({onAddPerson}) {
         />
         <button
         onClick={handleClick}
-        className="px-2 py-1 bg-stone-600 rounded hover:bg-stone-700"
+        className="px-2 py-1 bg-blue-600 rounded hover:bg-blue-800 cursor-pointer"
         >Add Person
         </button>
     </div>
