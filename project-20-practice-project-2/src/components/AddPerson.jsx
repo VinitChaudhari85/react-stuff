@@ -14,10 +14,9 @@ export default function AddPerson({ addFunction }) {
     <div className="border border-white flex p-3 gap-3">
       <input
         type="text"
-        value={name}  // Still need this to clear input after adding
+        value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Enter person's name"
-        className="px-3 py-1 bg-stone-800 rounded text-white"
       />
       <Button onClick={handleClick}>Add Person</Button>
     </div>

@@ -2,10 +2,17 @@ import Header from "./components/Header.jsx";
 import AddPerson from "./components/AddPerson.jsx";
 import { useState } from "react";
 import Button from "./components/Button.jsx";
+import AddExpense from "./components/AddExpense.jsx";
 
 export default function App() {
+
+  //we made a state, whose initial value is an array for storing the persons.
   const [persons, setPersons] = useState([]);
 
+  //do the same here but for storing the expenses here
+  const [expenses, setExpenses] = useState([]);
+
+  //this is the function for adding people to the array
   function handleAddPerson(name) {
     const newPerson = {
       id: Math.random(),
@@ -19,7 +26,21 @@ export default function App() {
     //but instead we are simply using filter method which automatically creates a new array for us
     //we are using filter method inside setter function pair so it will set the new values to the array without that person which is to be 
     //removed, that is the efficient way to handle removing array
-    setPersons((prevPersons)=> prevPersons.filter((person) => person.id != id))
+    setPersons((prevPersons)=> prevPersons.filter((person) => person.id !== id))
+  }
+  //make a function which adds the expense to the list i guess 
+  function handleAddExpense({name, amount}){
+    const newExpense = {
+      id: Math.random(),
+      name: name,
+      amount: amount
+    }
+    setExpenses((prevExpenses) => [...prevExpenses, newExpense])
+  }
+
+  //filter out the array of expenses the same way ypu did for the persons ig
+  function handleRemoveExpense(expenseId){
+    setExpenses((prevExpenses)=> prevExpenses.filter((expense)=> expense.id !== expenseId))
   }
 
   return (
@@ -42,6 +63,7 @@ export default function App() {
             </ul>
           )}
         </div>
+        <AddExpense />
       </div>
     </div>
   );
