@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function AddExpense({ persons, onAddExpense }) {
   const [description, setDescription] = useState("");
@@ -113,7 +113,7 @@ export default function AddExpense({ persons, onAddExpense }) {
 
       <button
         onClick={handleClick}
-        className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-600 transition shadow-lg shadow-blue-500/20"
+        className="w-full py-3 bg-linear-to-r from-blue-600 to-blue-500 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-600 transition shadow-lg shadow-blue-500/20"
       >
         Add Expense
       </button>

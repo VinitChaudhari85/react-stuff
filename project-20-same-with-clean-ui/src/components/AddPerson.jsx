@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function AddPerson({ onAddPerson }) {
   const [name, setName] = useState("");
+
+  const inputFieldRef = useRef(null);
+
+    useEffect(()=>{
+      console.log("Ref value:", inputFieldRef.current); 
+      inputFieldRef.current.focus()
+    },[])
+
 
   function handleClick() {
     if (name.trim() === "") return;
@@ -19,6 +27,7 @@ export default function AddPerson({ onAddPerson }) {
     <div className="bg-stone-800/50 backdrop-blur border border-stone-700 p-4 flex gap-3 rounded-2xl">
       <input
         type="text"
+        ref={inputFieldRef}
         value={name}
         onChange={(e) => setName(e.target.value)}
         onKeyPress={handleKeyPress}

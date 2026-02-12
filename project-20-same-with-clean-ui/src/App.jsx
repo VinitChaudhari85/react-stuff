@@ -80,7 +80,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-stone-900 via-stone-800 to-stone-900 text-white pt-8 pb-16">
-      <Header heading="Expense Splitter" />
+      <Header heading="Expense Splitter"/>
       
       <div className="max-w-4xl mx-auto px-6 space-y-8">
         {/* Add Person Section */}
