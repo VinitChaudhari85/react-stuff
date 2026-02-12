@@ -38,7 +38,7 @@ export default function DebtSummary({ persons, debts }) {
           {debtList.map((debt, index) => (
             <li
               key={index}
-              className="bg-gradient-to-r from-stone-800/50 to-stone-800/30 backdrop-blur border border-stone-700 p-5 rounded-2xl hover:border-stone-600 transition"
+              className="bg-linear-to-r from-stone-800/50 to-stone-800/30 backdrop-blur border border-stone-700 p-5 rounded-2xl hover:border-stone-600 transition"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">

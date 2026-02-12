@@ -79,7 +79,7 @@ export default function App() {
   const debts = calculateDebts(expenses);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white pt-8 pb-16">
+    <div className="min-h-screen bg-linear-to-br from-stone-900 via-stone-800 to-stone-900 text-white pt-8 pb-16">
       <Header heading="Expense Splitter" />
       
       <div className="max-w-4xl mx-auto px-6 space-y-8">
