@@ -8,7 +8,7 @@ export default function AddExpense({ persons, onAddExpense }) {
 
   function handleParticipantToggle(id) {
     setParticipants((prev) =>
-      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id],
+      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
     );
   }
 
@@ -20,8 +20,8 @@ export default function AddExpense({ persons, onAddExpense }) {
     onAddExpense({
       description,
       amount: Number(amount),
-      paidBy: Number(paidBy),
-      participants: participants.map(Number),
+      paidBy: paidBy, // Changed: No need to convert to Number since we're using crypto.randomUUID() now (strings)
+      participants: participants, // Changed: No need to map to Number
     });
 
     setAmount("");
@@ -69,11 +69,11 @@ export default function AddExpense({ persons, onAddExpense }) {
       {/* participants */}
       <div>
         <p className="mb-2">Split between:</p>
-        {/* checkboxes will go here */}
         {persons.map((person) => (
           <label key={person.id} className="block">
             <input
               type="checkbox"
+              checked={participants.includes(person.id)} // BUG FIX: Added this line!
               onChange={() => handleParticipantToggle(person.id)}
             />
             {person.name}

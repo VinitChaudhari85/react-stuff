@@ -31,7 +31,7 @@ export default function App() {
   // Make a function for adding people
   function handleAddperson(name) {
     const newPerson = {
-      id: crypto.randomUUID(), // Better than Math.random()
+      id: crypto.randomUUID(),
       name: name,
     };
     setPersons((prevPersons) => [...prevPersons, newPerson]);
@@ -39,7 +39,7 @@ export default function App() {
 
   // Make a function to remove a person
   function handleRemovePerson(id) {
-    // BUG FIX: Check if this person is in any expense
+    // Check if this person is in any expense
     const hasExpenses = expenses.some(
       (expense) =>
         expense.paidBy === id || expense.participants.includes(id)
@@ -61,14 +61,14 @@ export default function App() {
   // Make a function to add an expense
   function handleAddExpense(expenseData) {
     const newExpense = {
-      id: crypto.randomUUID(), // Better than Math.random()
+      id: crypto.randomUUID(),
       ...expenseData,
     };
 
     setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
   }
 
-  // NEW: Make a function to remove an expense
+  // Make a function to remove an expense
   function handleRemoveExpense(id) {
     setExpenses((prevExpenses) =>
       prevExpenses.filter((expense) => expense.id !== id)
@@ -79,53 +79,78 @@ export default function App() {
   const debts = calculateDebts(expenses);
 
   return (
-    <div className="min-h-screen bg-stone-900 text-white pt-6">
+    <div className="min-h-screen bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white pt-8 pb-16">
       <Header heading="Expense Splitter" />
-      <div className="max-w-2xl mx-auto p-6">
-        <AddPerson onAddPerson={handleAddperson} />
+      
+      <div className="max-w-4xl mx-auto px-6 space-y-8">
+        {/* Add Person Section */}
+        <section>
+          <h2 className="text-lg font-semibold mb-3 text-stone-300">
+            👥 Add People
+          </h2>
+          <AddPerson onAddPerson={handleAddperson} />
+        </section>
 
-        <div className="mt-6">
-          <AddExpense persons={persons} onAddExpense={handleAddExpense} />
-        </div>
-
-        {/* DebtSummary - Shows who owes whom */}
-        <div className="mt-6">
-          <DebtSummary persons={persons} debts={debts} />
-        </div>
-
-        {/* ExpenseList - Shows all expenses */}
-        <div className="mt-6">
-          <ExpenseList
-            persons={persons}
-            expenses={expenses}
-            onRemoveExpense={handleRemoveExpense} // NEW: Pass delete function
-          />
-        </div>
-
-        {/* People List - Shows all people with remove buttons */}
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-3">People:</h2>
-          {persons.length === 0 ? (
-            <p className="text-stone-400">No people added yet</p>
-          ) : (
-            <ul className="space-y-2">
+        {/* People List */}
+        {persons.length > 0 && (
+          <section>
+            <h2 className="text-lg font-semibold mb-3 text-stone-300">
+              Group Members ({persons.length})
+            </h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {persons.map((person) => (
                 <li
                   key={person.id}
-                  className="bg-stone-800 p-3 rounded-2xl flex gap-2 items-center"
+                  className="bg-stone-800/50 backdrop-blur border border-stone-700 p-3 rounded-xl flex justify-between items-center hover:bg-stone-800 transition"
                 >
-                  <span>{person.name}</span>
+                  <span className="font-medium">{person.name}</span>
                   <button
                     onClick={() => handleRemovePerson(person.id)}
-                    className="px-2 py-1 bg-stone-600 rounded hover:bg-stone-700"
+                    className="px-3 py-1 bg-red-600/20 text-red-400 border border-red-600/30 rounded-lg hover:bg-red-600/30 transition text-sm"
                   >
                     Remove
                   </button>
                 </li>
               ))}
             </ul>
-          )}
-        </div>
+          </section>
+        )}
+
+        {/* Add Expense Section */}
+        {persons.length > 0 && (
+          <section>
+            <h2 className="text-lg font-semibold mb-3 text-stone-300">
+              💰 Add Expense
+            </h2>
+            <AddExpense persons={persons} onAddExpense={handleAddExpense} />
+          </section>
+        )}
+
+        {/* Show message if no people added */}
+        {persons.length === 0 && (
+          <div className="bg-stone-800/30 border border-stone-700 p-8 rounded-2xl text-center">
+            <p className="text-stone-400 text-lg mb-2">
+              👋 Get started by adding people to your group
+            </p>
+            <p className="text-stone-500 text-sm">
+              Add at least 2 people to start tracking expenses
+            </p>
+          </div>
+        )}
+
+        {/* Debt Summary */}
+        {expenses.length > 0 && (
+          <DebtSummary persons={persons} debts={debts} />
+        )}
+
+        {/* Expense List */}
+        {expenses.length > 0 && (
+          <ExpenseList
+            persons={persons}
+            expenses={expenses}
+            onRemoveExpense={handleRemoveExpense}
+          />
+        )}
       </div>
     </div>
   );

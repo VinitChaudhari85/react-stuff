@@ -1,4 +1,4 @@
-export default function ExpenseList({ persons, expenses }) {
+export default function ExpenseList({ persons, expenses, onRemoveExpense }) {
   return (
     <div className="mt-10">
       <h2 className="text-2xl font-semibold mb-4">Expenses</h2>
@@ -11,7 +11,7 @@ export default function ExpenseList({ persons, expenses }) {
         <ul className="space-y-4">
           {expenses.map((expense) => {
             const payer = persons.find(
-              (person) => person.id === expense.paidBy,
+              (person) => person.id === expense.paidBy
             );
 
             const participantsName = expense.participants
@@ -24,28 +24,38 @@ export default function ExpenseList({ persons, expenses }) {
                 className="bg-stone-800 border border-stone-700 p-5 rounded-2xl shadow-sm hover:shadow-md transition"
               >
                 <div className="flex justify-between items-start">
-                  <p className="text-lg font-semibold">
-                    {expense.description}
-                  </p>
-                  <span className="text-green-400 font-semibold">
-                    ₹{expense.amount}
-                  </span>
-                </div>
-
-                <div className="mt-3 text-sm text-stone-300 space-y-1">
-                  <p>
-                    Paid by:{" "}
-                    <span className="text-white font-medium">
-                      {payer ? payer.name : "Unknown"}
+                  <div className="flex-1">
+                    <p className="text-lg font-semibold">
+                      {expense.description}
+                    </p>
+                    <span className="text-green-400 font-semibold">
+                      ₹{expense.amount}
                     </span>
-                  </p>
 
-                  <p>
-                    Split between:{" "}
-                    <span className="text-white font-medium">
-                      {participantsName}
-                    </span>
-                  </p>
+                    <div className="mt-3 text-sm text-stone-300 space-y-1">
+                      <p>
+                        Paid by:{" "}
+                        <span className="text-white font-medium">
+                          {payer ? payer.name : "Unknown"}
+                        </span>
+                      </p>
+
+                      <p>
+                        Split between:{" "}
+                        <span className="text-white font-medium">
+                          {participantsName}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* NEW: Delete button */}
+                  <button
+                    onClick={() => onRemoveExpense(expense.id)}
+                    className="px-3 py-1 bg-red-600 rounded hover:bg-red-700 text-sm ml-4"
+                  >
+                    Delete
+                  </button>
                 </div>
               </li>
             );
