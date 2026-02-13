@@ -6,7 +6,7 @@ export default function AddPerson({ onAddPerson }) {
   const inputFieldRef = useRef(null);
 
     useEffect(()=>{
-      console.log("Ref value:", inputFieldRef.current); 
+      console.log("Ref value:", inputFieldRef.current);
       inputFieldRef.current.focus()
     },[])
 
