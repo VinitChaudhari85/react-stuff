@@ -1,11 +1,18 @@
-import { useActionState } from "react";
+import { useActionState, use } from "react";
+
+import { OpinionsContext } from "../store/opinions-context";
+
+import Submit from "./Submit";
 
 export function NewOpinion() {
 
-  function shareOpinionAction( prevFormState ,formData){
+  const { addOpinion } = use(OpinionsContext);
+
+  async function shareOpinionAction( prevFormState ,formData){
+
     const title = formData.get('title');
     const body = formData.get('body');
-    const username = formData.get('userName');
+    const userName = formData.get('userName');
 
     let errors = [];
 
@@ -17,7 +24,7 @@ export function NewOpinion() {
       errors.push('The opinion must be between 10 to 300 characters long.')
     }
 
-    if(!username.trim()){
+    if(!userName.trim()){
       errors.push('Please provide your username.')
     }
 
@@ -25,12 +32,12 @@ export function NewOpinion() {
       return {errors, enteredValues: {
         title,
         body,
-        username
+        userName
       }}
     }
 
     //if it makes it past this code that means form is valid, so send to backend
-
+    await addOpinion({title, body, userName})
     return { errors: null }
 
     
@@ -46,7 +53,7 @@ export function NewOpinion() {
         <div className="control-row">
           <p className="control">
             <label htmlFor="userName">Your Name</label>
-            <input type="text" id="userName" name="userName" defaultValue={formState.enteredValues?.username}/>
+            <input type="text" id="userName" name="userName" defaultValue={formState.enteredValues?.userName}/>
           </p>
 
           <p className="control">
@@ -71,9 +78,8 @@ export function NewOpinion() {
           </ul>
         )}
 
-        <p className="actions">
-          <button type="submit">Submit</button>
-        </p>
+        <Submit/>
+
       </form>
     </div>
   );
