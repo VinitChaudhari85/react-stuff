@@ -1,80 +1,93 @@
-// useSelector lets us READ data from Redux store.
-// useDispatch lets us SEND actions to Redux store.
+// React hooks
+import { useEffect } from "react";
+
+// Redux hooks
 import { useSelector, useDispatch } from "react-redux";
 
-// Import the action creators we exported from slice.
+// Counter actions
 import { increment, decrement } from "./store/counterSlice";
+
+// Theme actions
 import { darkModeOff, darkModeOn } from "./store/themeSlice";
 
-function App() {
-  // STEP 1: Read data from Redux store.
-  // state = entire global state
-  // state.counter = slice
-  // state.counter.counter = actual value
-  const counterValue = useSelector((state) => state.counter.counter);
+// Async thunk action
+import { fetchProducts } from "./store/productsSlice";
 
-  // STEP 2: Get dispatch function.
-  // dispatch is how we send actions to Redux.
+function App() {
+
+  // Dispatch function to send actions to Redux
   const dispatch = useDispatch();
 
+
+  // ---------------- COUNTER STATE ----------------
+  // Reading counter state from Redux store
+  const counterValue = useSelector((state) => state.counter.counter);
+
+
+  // ---------------- THEME STATE ----------------
+  // Reading theme state from Redux store
   const background = useSelector((state) => state.theme.darkmode);
 
+
+  // ---------------- PRODUCTS STATE ----------------
+  // Reading async Redux states
+  const products = useSelector((state) => state.products.items);
+  const loading = useSelector((state) => state.products.loading);
+  const error = useSelector((state) => state.products.error);
+
+
+  // ---------------- ASYNC CALL ----------------
+  // When component loads:
+  // dispatch(fetchProducts())
+  // ↓
+  // thunk runs API call
+  // ↓
+  // Redux dispatches:
+  // pending → fulfilled → rejected
+  // ↓
+  // extraReducers update state
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+
+  // ---------------- UI CONDITIONS ----------------
+  if (loading) return <p>Loading products...</p>;
+  if (error) return <p>{error}</p>;
+
+
+  // ---------------- MAIN UI ----------------
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${
-        background ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
-      }`}
-    >
-      <div className="w-full max-w-md bg-white/5 backdrop-blur-md rounded-2xl shadow-xl p-8 border border-white/10">
-        {/* Title */}
-        <h1 className="text-3xl font-bold text-center mb-6 tracking-tight">
-          Redux Counter
-        </h1>
+    <div className={background ? `bg-black text-white min-h-screen` : `bg-white text-black min-h-screen`}>
 
-        {/* Counter Display */}
-        <div className="text-center mb-8">
-          <p className="text-sm opacity-70 mb-2">Current Value</p>
-          <h2 className="text-5xl font-extrabold">{counterValue}</h2>
-        </div>
+      {/* COUNTER SECTION */}
+      <h1>Counter: {counterValue}</h1>
 
-        {/* Counter Buttons */}
-        <div className="flex gap-4 mb-8">
-          <button
-            onClick={() => dispatch(increment())}
-            className="flex-1 bg-green-500 hover:bg-green-600 active:scale-95 transition-all duration-200 text-white font-semibold py-3 rounded-xl shadow-md"
-          >
-            Increase
-          </button>
+      <button onClick={() => dispatch(increment())}>
+        Increase
+      </button>
 
-          <button
-            onClick={() => dispatch(decrement())}
-            className="flex-1 bg-red-500 hover:bg-red-600 active:scale-95 transition-all duration-200 text-white font-semibold py-3 rounded-xl shadow-md"
-          >
-            Decrease
-          </button>
-        </div>
+      <button onClick={() => dispatch(decrement(5))}>
+        Decrease
+      </button>
 
-        {/* Theme Section */}
-        <div className="border-t border-white/10 pt-6">
-          <p className="text-center text-sm opacity-70 mb-4">Theme Controls</p>
 
-          <div className="flex gap-4">
-            <button
-              onClick={() => dispatch(darkModeOn())}
-              className="flex-1 bg-gray-800 hover:bg-black active:scale-95 transition-all duration-200 text-white font-semibold py-2 rounded-lg"
-            >
-              Dark Mode
-            </button>
-
-            <button
-              onClick={() => dispatch(darkModeOff())}
-              className="flex-1 bg-gray-200 hover:bg-gray-300 active:scale-95 transition-all duration-200 text-gray-900 font-semibold py-2 rounded-lg"
-            >
-              Light Mode
-            </button>
-          </div>
-        </div>
+      {/* THEME CONTROLS */}
+      <div>
+        <button onClick={() => dispatch(darkModeOn())}>Go Dark</button>
+        <button onClick={() => dispatch(darkModeOff())}>Go Light</button>
       </div>
+
+
+      {/* PRODUCTS SECTION */}
+      <h2>Products</h2>
+
+      <div>
+        {products.map((product) => (
+          <p key={product.id}>{product.title}</p>
+        ))}
+      </div>
+
     </div>
   );
 }

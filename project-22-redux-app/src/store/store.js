@@ -4,6 +4,8 @@ import counterReducer from "./counterSlice"
 
 import themeReducer from "./themeSlice"
 
+import productsReducer from "./productsSlice"
+
 //Here create a global redux store using configureStore()
 //What i interpreted is, into the store we can have multiple reducers right? so in configure store there's reducer object 
 //which can contain multiple reducers...maybe from multiple slices to manage multiple state, 
@@ -12,7 +14,8 @@ import themeReducer from "./themeSlice"
 const store = configureStore({
     reducer: {
         counter: counterReducer,
-        theme: themeReducer
+        theme: themeReducer,
+        products: productsReducer
     }
 });
 
