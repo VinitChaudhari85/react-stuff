@@ -7,7 +7,7 @@ const initialState = { counter: 0 }
 //so create a slice using createSlice()
 //Now the slice requires 3 things: name, initial state, reducers
 
-//THIS RIGHT HERE IS OUR REDUCER ACTUALLY AND REDUCER TAKES ACTIONS AND STATE IF YOU REMEMBER 
+//THIS RIGHT HERE IS OUR REDUCER ACTUALLY AND REDUCER TAKES ACTIONS AND STATE IF YOU REMEMBER
 //SO GIVE INITIAL STATE AND ACTIONS INSIDE, NAME IS GIVEN TO TOOLKIT FOR...WHATEVER IT DOES
 const counterSlice = createSlice({
 
@@ -20,13 +20,29 @@ const counterSlice = createSlice({
 
         //whichever reducers/actions that you create inside this area will automatically get the current state by redux toolkit
         //Now we want functions/actions for incrementing and decrementing the counter state
+
+
+        ///////////////
+        // WITH PAYLOAD        
+        ///////////////
+
+        // increment(state, action){
+        //     //This is done immutably by toolkit
+        //     state.counter += action.payload
+        // },
+        // decrement(state,action){
+        //     //This is done immutably by toolkit
+        //     state.counter -= action.payload
+        // }
+
+
         increment(state){
             //This is done immutably by toolkit
             state.counter++
         },
         decrement(state){
             //This is done immutably by toolkit
-            state.counter--
+            state.counter++
         }
     }
 })
