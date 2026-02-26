@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Homepage() {
   return (
     <>
-      <h1>This is my homepage, <Link to="/products">Go to products page.</Link></h1>
+      <h1>This is my homepage, <Link to="products">Go to products page.</Link></h1>
     </>
   );
 }

@@ -5,6 +5,7 @@ import Homepage from "./pages/Homepage";
 import Products from "./pages/Products";
 import Error from "./pages/Error";
 import Root from "./pages/Root";
+import ProductDetails from "./pages/ProductDetails";
 
 //use it and pass an array of objects into it, where each object represents a route
 
@@ -22,8 +23,9 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <Error/>,
     children: [
-      { path: "/", element: <Homepage /> },
-      { path: "/products", element: <Products /> },
+      { path: "", element: <Homepage /> },
+      { path: "products", element: <Products /> },
+      { path: "products/:id", element: <ProductDetails/> }
     ],
   },
 ]);
